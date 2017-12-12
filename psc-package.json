@@ -1,0 +1,14 @@
+{
+    "name": "validationtown",
+    "set": "psc-0.11.7",
+    "source": "https://github.com/purescript/package-sets.git",
+    "depends": [
+        "simple-json",
+        "strings",
+        "validation",
+        "foreign-generic",
+        "variant",
+        "console",
+        "prelude"
+    ]
+}
