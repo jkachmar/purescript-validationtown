@@ -143,7 +143,7 @@ validateForm' {email, username, password, address} =
 --------------------------------------------------------------------------------
 type ValidationResultType = Variant
   ( unprocessable :: MultipleErrors
-  , errors        :: FormErrors
+  , formErrors    :: FormErrors
   , form          :: ValidatedForm
   )
 
@@ -160,6 +160,6 @@ validateForm = mkFn1 impl
           ValidationResult (inj (SProxy :: SProxy "unprocessable") err)
         Right form ->
           ValidationResult $ unV
-            (inj $ SProxy :: SProxy "errors")
+            (inj $ SProxy :: SProxy "formErrors")
             (inj $ SProxy :: SProxy "form")
             (validateForm' form)

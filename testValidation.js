@@ -1,3 +1,4 @@
+const util = require('util');
 const { validateForm } = require('./output/ValidateForm');
 
 const validForm = {
@@ -9,7 +10,7 @@ const validForm = {
     address2: "MyApt",
     city: "MyCity",
     zipCode: "MyZipCode",
-    country: "MyCountry",
+    country: "MyCountry"
   }
 };
 
@@ -22,14 +23,41 @@ const invalidForm = {
     address2: "",
     city: "",
     zipCode: "",
-    country: "",
+    country: ""
   }
 };
 
-const badForm = { email: false };
+const badForm = {
+  address: {}
+};
 
-console.log(validateForm(validForm));
 
-console.log(validateForm(invalidForm));
+const log = a => { console.log(util.inspect(a, false, null)); };
 
-console.log(JSON.stringify(validateForm(badForm)));
+const handleValidation = (v) => {
+  switch(v.type) {
+  case 'unprocessable':
+    console.log('The input form failed to parse with the following errors:\n');
+    break;
+
+  case 'formErrors':
+    console.log('The input form failed validation with the following errors:\n');
+    break;
+
+  case 'form':
+    console.log('The input form was successfully processed:\n');
+    break;
+
+  default:
+    console.log('The impossible happened!');
+    console.log('We didn\'t handle all the potential error cases!');
+    return;
+  }
+  log(v.value);
+};
+
+handleValidation(validateForm(badForm));
+console.log(''); // drop some newlines in to make things look nice
+handleValidation(validateForm(invalidForm));
+console.log(''); // drop some newlines in to make things look nice
+handleValidation(validateForm(validForm));

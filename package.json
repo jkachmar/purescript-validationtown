@@ -1,7 +1,7 @@
 {
   "scripts": {
     "postinstall": "psc-package update && pulp build",
-    "demo": "node testValidation.js"
+    "demo": "pulp build && node testValidation.js"
   },
   "devDependencies": {
     "psc-package": "^0.2.5",
